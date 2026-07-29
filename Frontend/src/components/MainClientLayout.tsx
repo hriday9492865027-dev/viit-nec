@@ -17,11 +17,15 @@ export default function MainClientLayout() {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Check if the user has already entered the site during this session
-    const hasEntered = sessionStorage.getItem('ecell_has_entered');
-    if (hasEntered === 'true') {
-      setShowIntro(false);
-    }
+    const handleTriggerIntro = () => {
+      setFadeOut(false);
+      setShowIntro(true);
+    };
+
+    window.addEventListener('trigger-intro-page', handleTriggerIntro);
+    return () => {
+      window.removeEventListener('trigger-intro-page', handleTriggerIntro);
+    };
   }, []);
 
   const handleEnterSite = () => {
@@ -29,7 +33,6 @@ export default function MainClientLayout() {
     // Smooth transition
     setTimeout(() => {
       setShowIntro(false);
-      sessionStorage.setItem('ecell_has_entered', 'true');
     }, 800);
   };
 

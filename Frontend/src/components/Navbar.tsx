@@ -36,14 +36,20 @@ export default function Navbar() {
           <div className="grid grid-cols-3 items-center py-3">
 
             <div className="flex items-center justify-start animate-fade-left">
-              <Link href="/" className="block group">
+              <button 
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.dispatchEvent(new CustomEvent('trigger-intro-page'));
+                }}
+                className="block group bg-transparent border-none p-0 focus:outline-none cursor-pointer"
+              >
                 <img
                   src="/logos/ecell-logo.jpg"
                   alt="E-Cell Logo"
                   className="h-12.5 sm:h-15 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform duration-300"
                   style={{ height: '90px' }}
                 />
-              </Link>
+              </button>
             </div>
 
             <div className="flex items-center justify-center animate-fade-down">
