@@ -62,7 +62,7 @@ export default function IntroPage({ onEnter }: IntroPageProps) {
     let logoMesh: THREE.Mesh | null = null;
 
     loader.load('data:image/png;base64,' + INTRO_LOGO_B64, (tex) => {
-      tex.encoding = THREE.sRGBEncoding;
+      tex.colorSpace = THREE.SRGBColorSpace;
       const geo = new THREE.PlaneGeometry(3.5, 3.5, 40, 40);
       const mat = new THREE.MeshStandardMaterial({
         map: tex,

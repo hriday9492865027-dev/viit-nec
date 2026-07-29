@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { getGalleryImages, saveGalleryImages } from '@/lib/storage';
+import { getGalleryImages, saveGalleryImages } from '@backend/lib/storage';
 import { GalleryImage } from '@/types';
 
 export async function POST(req: NextRequest) {
