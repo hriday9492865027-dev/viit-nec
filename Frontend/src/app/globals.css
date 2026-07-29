@@ -1,0 +1,396 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --font-sans: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   TYPOGRAPHY: Bolder + Bigger defaults
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw + 1rem, 5rem); }
+h2 { font-size: clamp(1.85rem, 3vw + 0.5rem, 3rem); }
+h3 { font-size: clamp(1.25rem, 2vw + 0.25rem, 1.5rem); }
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  font-weight: 450;
+}
+
+/* ============================================
+   SMOOTH SCROLL + UNIVERSAL TRANSITIONS
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a, button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.15); }
+  50% { box-shadow: 0 0 20px 4px rgba(37, 99, 235, 0.08); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: #e2e8f0; }
+  50% { border-color: #93c5fd; }
+}
+
+/* ============================================
+   ANIMATION UTILITY CLASSES
+   ============================================ */
+.animate-fade-up {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+.animate-fade-down {
+  animation: fadeInDown 0.6s ease-out forwards;
+}
+.animate-fade-left {
+  animation: fadeInLeft 0.7s ease-out forwards;
+}
+.animate-fade-right {
+  animation: fadeInRight 0.7s ease-out forwards;
+}
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out forwards;
+}
+.animate-float {
+  animation: floatSoft 4s ease-in-out infinite;
+}
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s ease infinite;
+}
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Staggered delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+
+/* Start with opacity 0 for stagger items */
+.stagger-item {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ============================================
+   SUBTLE BACKGROUND PATTERNS
+   ============================================ */
+.tech-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(30, 58, 138, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 58, 138, 0.04) 1px, transparent 1px);
+}
+
+/* ============================================
+   GLASSMORPHISM
+   ============================================ */
+.glass-nav-white {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+}
+
+/* ============================================
+   BADGE STYLES
+   ============================================ */
+.badge-iitb-tech {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 1px solid #93c5fd;
+  color: #1e3a8a;
+}
+
+/* ============================================
+   CARD SYSTEM: Smooth Hover Animations
+   ============================================ */
+.card-tech {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, box-shadow, border-color;
+}
+
+.card-tech:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: #93c5fd;
+  box-shadow: 
+    0 20px 40px -10px rgba(29, 78, 216, 0.15),
+    0 8px 16px -4px rgba(37, 99, 235, 0.08),
+    0 0 0 1px rgba(147, 197, 253, 0.3);
+}
+
+/* ============================================
+   ACCENT LINES
+   ============================================ */
+.accent-line-tech {
+  position: relative;
+}
+
+.accent-line-tech::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 50%, #0284c7 100%);
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  transition: height 0.3s ease;
+}
+
+.accent-line-tech:hover::before {
+  height: 4px;
+}
+
+/* ============================================
+   IMAGE / GALLERY CARD HOVER EFFECTS
+   ============================================ */
+.gallery-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.gallery-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 
+    0 24px 48px -12px rgba(29, 78, 216, 0.2),
+    0 8px 20px -4px rgba(0, 0, 0, 0.08);
+}
+
+.gallery-card img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-card:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-card .overlay {
+  transition: opacity 0.4s ease;
+}
+
+.gallery-card:hover .overlay {
+  opacity: 1 !important;
+}
+
+/* ============================================
+   SECTION TRANSITIONS (Scroll fade-in)
+   ============================================ */
+section {
+  transition: opacity 0.4s ease;
+}
+
+/* ============================================
+   BUTTON HOVER ENHANCEMENTS
+   ============================================ */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(29, 78, 216, 0.3);
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover::after {
+  opacity: 1;
+}
+
+/* ============================================
+   NAV LINK HOVER UNDERLINE ANIMATION
+   ============================================ */
+.nav-link-animated {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-link-animated::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #1e3a8a, #2563eb);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+.nav-link-animated:hover::after {
+  width: 100%;
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* ============================================
+   LOGO CONTAINER UNIFORMITY
+   ============================================ */
+.logo-container {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.logo-container:hover {
+  transform: scale(1.08);
+}
+
+.logo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

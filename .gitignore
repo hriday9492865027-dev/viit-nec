@@ -1,0 +1,23 @@
+# Next.js build output cache
+Frontend/.next/
+Backend/.next/
+.next/
+
+# Dependencies
+Frontend/node_modules/
+Backend/node_modules/
+node_modules/
+
+# Local database locks/json
+Frontend/data/*.json
+Backend/data/*.json
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
