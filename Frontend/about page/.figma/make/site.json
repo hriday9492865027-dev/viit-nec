@@ -1,0 +1,10 @@
+{
+  "description": "Showcase your team's leadership with a visually appealing page featuring creative card layouts for the president, vice presidents, and secretaries.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

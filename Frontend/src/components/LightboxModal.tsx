@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GalleryImage } from '@/types';
