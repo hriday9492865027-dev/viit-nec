@@ -69,7 +69,7 @@ export default function Footer() {
             <ul className="space-y-2 text-xs font-semibold">
               <li><a href="#home" className="hover:text-blue-400 transition-colors">Home</a></li>
               <li><a href="#about" className="hover:text-blue-400 transition-colors">About NEC E-Cell</a></li>
-              <li><a href="#events" className="hover:text-blue-400 transition-colors">Events & Summits</a></li>
+              <li><a href="#tasks-events" className="hover:text-blue-400 transition-colors">Tasks & Events</a></li>
               <li><a href="#gallery" className="hover:text-blue-400 transition-colors">Photo Gallery</a></li>
               <li><a href="#instagram" className="hover:text-blue-400 transition-colors">Instagram Feed</a></li>
             </ul>

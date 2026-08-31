@@ -40,10 +40,10 @@ export default function Hero() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-2 w-full sm:w-auto animate-fade-up" style={{ animationDelay: '400ms' }}>
             <a
-              href="#events"
+              href="#tasks-events"
               className="btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-5 rounded-2xl bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-sm uppercase tracking-wider shadow-lg shadow-blue-700/20 border border-blue-600/30"
             >
-              Explore Events & Summit
+              Explore Tasks & Events
               <ArrowRight className="w-5 h-5" />
             </a>
             <a

@@ -9,6 +9,17 @@ export interface EventItem {
   link?: string;
 }
 
+export interface TaskItem {
+  id: string;
+  title: string;
+  track: 'preliminary' | 'ignite-propel' | 'comprehensive';
+  deadline: string;
+  points: string;
+  status: 'checked' | 'not-submitted' | 'submitted';
+  description?: string;
+  deliverables?: string[];
+}
+
 export interface GalleryImage {
   id: string;
   url: string;

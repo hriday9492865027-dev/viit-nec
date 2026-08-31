@@ -1,4 +1,4 @@
-import { EventItem, GalleryImage, InstagramPost, TeamMember } from '@/types';
+import { EventItem, TaskItem, GalleryImage, InstagramPost, TeamMember } from '@/types';
 
 /**
  * CONFIGURATION & INSTAGRAM HANDLE
@@ -13,44 +13,184 @@ export const INSTAGRAM_CONFIG = {
  * INITIAL EVENTS DATA
  * Add or update your upcoming and past events here.
  */
-export const INITIAL_EVENTS: EventItem[] = [
+export const INITIAL_EVENTS: EventItem[] = [];
+
+/**
+ * NEC / IIT BOMBAY E-CELL TASKS DATA
+ */
+export const INITIAL_TASKS: TaskItem[] = [
+  // Preliminary Track
   {
-    id: "evt-1",
-    title: "E-Summit '26: Innovate for Tomorrow",
-    category: "upcoming",
-    date: "August 25-26, 2026",
-    location: "NEC Campus Auditorium",
-    description: "The flagship annual entrepreneurship summit featuring keynote speakers, startup expos, and pitch competitions in association with E-Cell IIT Bombay.",
-    imageUrl: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80",
-    link: "#register"
+    id: "task-1",
+    title: "Brand Your E-Cell",
+    track: "preliminary",
+    deadline: "9 Aug 2026",
+    points: "110/100",
+    status: "checked",
+    description: "Create and establish the brand identity, official logos, design kits, and active social media presence for the NEC E-Cell chapter.",
+    deliverables: [
+      "Official brand design kit & logo guidelines",
+      "Social media banner templates & typography styles",
+      "Public launch post & engagement proof"
+    ]
   },
   {
-    id: "evt-2",
-    title: "Pitch Perfect - B-Plan Competition",
-    category: "upcoming",
-    date: "September 10, 2026",
-    location: "Online / Hybrid",
-    description: "Present your business ideas to industry experts, venture capitalists, and mentors. Win seed funding opportunities and incubation support.",
-    imageUrl: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=800&q=80",
-    link: "#register"
+    id: "task-2",
+    title: "Draft A Work Report",
+    track: "preliminary",
+    deadline: "9 Aug 2026",
+    points: "130/120",
+    status: "checked",
+    description: "Compile and submit a structured annual roadmap, organizational hierarchy, team responsibilities, and key quarterly milestones.",
+    deliverables: [
+      "Executive summary and organizational structure",
+      "Event calendar and tentative budgetary outline",
+      "Key performance indicators (KPIs) and goals"
+    ]
   },
   {
-    id: "evt-3",
-    title: "Ideation Bootcamp 2026",
-    category: "past",
-    date: "April 15, 2026",
-    location: "NEC Innovation Hub",
-    description: "Hands-on design thinking and problem-solving workshop for aspiring student founders led by IIT Bombay E-Cell mentors.",
-    imageUrl: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
+    id: "task-3",
+    title: "Idea Box",
+    track: "preliminary",
+    deadline: "9 Aug 2026",
+    points: "150/140",
+    status: "checked",
+    description: "Set up and manage a physical and digital ideation portal to crowdsource innovative student startup concepts and problem statements.",
+    deliverables: [
+      "Physical and online idea submission forms",
+      "Curation and categorization of student ideas",
+      "Review panel feedback and shortlist documentation"
+    ]
   },
   {
-    id: "evt-4",
-    title: "Founder Talk Series: Zero to One",
-    category: "past",
-    date: "February 28, 2026",
-    location: "Virtual Webinar",
-    description: "An inspiring talk by successful alumni entrepreneurs discussing product-market fit and building resilient tech startups.",
-    imageUrl: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=800&q=80"
+    id: "task-4",
+    title: "Headstart Task",
+    track: "preliminary",
+    deadline: "9 Aug 2026",
+    points: "160/150",
+    status: "checked",
+    description: "Conduct high-impact orientation drives and introductory workshops to inspire campus students to pursue entrepreneurship.",
+    deliverables: [
+      "Interactive orientation session with 200+ attendees",
+      "Presentation deck on startup incubation opportunities",
+      "Attendee registration data and feedback summary"
+    ]
+  },
+  {
+    id: "task-5",
+    title: "Know Your Surroundings",
+    track: "preliminary",
+    deadline: "9 Aug 2026",
+    points: "130/120",
+    status: "checked",
+    description: "Map and document the regional startup ecosystem, local angel networks, incubators, alumni founders, and academic research labs.",
+    deliverables: [
+      "Comprehensive directory of local incubators & funds",
+      "Interviews and contact catalog of 10+ alumni entrepreneurs",
+      "Regional innovation ecosystem report"
+    ]
+  },
+  {
+    id: "task-6",
+    title: "Gather Insights",
+    track: "preliminary",
+    deadline: "9 Aug 2026",
+    points: "110/100",
+    status: "checked",
+    description: "Run comprehensive campus surveys and focus groups to identify student interests, pain points, and skill gaps in startup building.",
+    deliverables: [
+      "Survey response analytics across multiple engineering branches",
+      "Key insights report on student startup readiness",
+      "Actionable recommendations for upcoming workshops"
+    ]
+  },
+
+  // Ignite Propel Track
+  {
+    id: "task-7",
+    title: "Social Media Challenge",
+    track: "ignite-propel",
+    deadline: "14 Sep 2026",
+    points: "-/50",
+    status: "not-submitted",
+    description: "Design and execute a viral social media campaign promoting startup literacy, myth-busting, and case studies across platforms.",
+    deliverables: [
+      "Carousel series on startup fundamentals",
+      "Short-form video reels featuring campus founders",
+      "Analytics report on reach, impressions, and engagement"
+    ]
+  },
+  {
+    id: "task-8",
+    title: "LinkedIn Presentation",
+    track: "ignite-propel",
+    deadline: "14 Sep 2026",
+    points: "-/50",
+    status: "not-submitted",
+    description: "Prepare and publish a high-quality LinkedIn slide presentation showcasing campus innovation achievements and corporate partnerships.",
+    deliverables: [
+      "10-slide professional PDF presentation",
+      "Tags and mentions of industry partners & E-Cell IIT Bombay",
+      "Engagement and endorsement metrics"
+    ]
+  },
+  {
+    id: "task-9",
+    title: "LinkedIn Blog",
+    track: "ignite-propel",
+    deadline: "14 Sep 2026",
+    points: "-/100",
+    status: "not-submitted",
+    description: "Write and publish an authoritative thought leadership blog discussing recent technology breakthroughs, venture funding, and founder journeys.",
+    deliverables: [
+      "800+ word long-form LinkedIn article",
+      "SEO & keyword optimized copy with visual graphics",
+      "Author byline and chapter link credits"
+    ]
+  },
+  {
+    id: "task-10",
+    title: "Freshie Intro",
+    track: "ignite-propel",
+    deadline: "14 Sep 2026",
+    points: "-/90",
+    status: "not-submitted",
+    description: "Organize dedicated freshman outreach activities, quizzes, problem-solving games, and mentorship signups to onboard first-year talent.",
+    deliverables: [
+      "On-ground interactive recruitment booth",
+      "Gamified entrepreneurship quiz & swag giveaways",
+      "Cohort onboarding list for junior cell members"
+    ]
+  },
+
+  // Comprehensive Track
+  {
+    id: "task-11",
+    title: "Eureka! Pitching",
+    track: "comprehensive",
+    deadline: "29 Aug 2026",
+    points: "-/200",
+    status: "not-submitted",
+    description: "Host preliminary pitching and screening rounds for Eureka! — Asia's largest business model competition in association with E-Cell IIT Bombay.",
+    deliverables: [
+      "Pitching stage arrangement and judging rubric",
+      "Participation of 15+ student teams and pitch decks",
+      "Scorecards and nomination of top teams for zonal rounds"
+    ]
+  },
+  {
+    id: "task-12",
+    title: "illuminate Task",
+    track: "comprehensive",
+    deadline: "16 Oct 2026",
+    points: "-/400",
+    status: "not-submitted",
+    description: "Conduct Illuminate — the pre-summit full-day flagship entrepreneurship training workshop led by certified instructors and industry mentors.",
+    deliverables: [
+      "Full-day structured workshop execution with 150+ participants",
+      "Hands-on case study solving and business model canvas sessions",
+      "Participant certification and post-workshop feedback report"
+    ]
   }
 ];
 
