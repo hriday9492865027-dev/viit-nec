@@ -1,7 +1,5 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { GalleryImage } from '@/types';
 import LightboxModal from './LightboxModal';
 import { Maximize2, ArrowRight, Settings } from 'lucide-react';
@@ -50,7 +48,7 @@ export default function GalleryGrid() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="/admin"
+              to="/admin"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-slate-200 bg-white hover:bg-blue-50 text-slate-800 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 shadow-sm hover:border-blue-300 hover:-translate-y-0.5"
               title="Upload new photos & select featured images"
             >
@@ -58,7 +56,7 @@ export default function GalleryGrid() {
               Manage Featured
             </Link>
             <Link
-              href="/gallery"
+              to="/gallery"
               className="btn-primary inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white text-xs font-extrabold uppercase tracking-wider shadow-md shadow-blue-700/20"
             >
               View Full Gallery
@@ -78,7 +76,7 @@ export default function GalleryGrid() {
           <div className="p-16 text-center bg-white rounded-2xl border border-slate-200 space-y-5 shadow-sm">
             <p className="text-slate-600 text-base font-medium">No featured images selected yet.</p>
             <Link
-              href="/admin"
+              to="/admin"
               className="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-700 text-white text-xs font-extrabold uppercase tracking-wider"
             >
               Go to Admin Panel to Select Featured Images

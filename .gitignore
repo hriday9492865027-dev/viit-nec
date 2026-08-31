@@ -8,6 +8,10 @@ Frontend/node_modules/
 Backend/node_modules/
 node_modules/
 
+# Build outputs
+Frontend/dist/
+*.tsbuildinfo
+
 # Local database locks/json
 Frontend/data/*.json
 Backend/data/*.json
@@ -21,3 +25,4 @@ yarn-error.log*
 # OS files
 .DS_Store
 Thumbs.db
+

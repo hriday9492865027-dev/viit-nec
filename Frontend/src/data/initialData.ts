@@ -2,7 +2,6 @@ import { EventItem, TaskItem, GalleryImage, InstagramPost, TeamMember } from '@/
 
 /**
  * CONFIGURATION & INSTAGRAM HANDLE
- * Replace this handle with your official Instagram account handle.
  */
 export const INSTAGRAM_CONFIG = {
   handle: "viitnec",
@@ -11,7 +10,6 @@ export const INSTAGRAM_CONFIG = {
 
 /**
  * INITIAL EVENTS DATA
- * Add or update your upcoming and past events here.
  */
 export const INITIAL_EVENTS: EventItem[] = [];
 
@@ -196,7 +194,6 @@ export const INITIAL_TASKS: TaskItem[] = [
 
 /**
  * INITIAL GALLERY IMAGES
- * Use the Admin Panel at /admin to upload real images and mark them as featured.
  */
 export const INITIAL_GALLERY: GalleryImage[] = [
   {
@@ -250,7 +247,7 @@ export const INITIAL_GALLERY: GalleryImage[] = [
 ];
 
 /**
- * INSTAGRAM FEED POSTS (PLACEHOLDER/INTEGRATION DATA)
+ * INSTAGRAM FEED POSTS
  */
 export const INITIAL_INSTAGRAM_POSTS: InstagramPost[] = [
   {
@@ -292,41 +289,101 @@ export const INITIAL_INSTAGRAM_POSTS: InstagramPost[] = [
 ];
 
 /**
- * TEAM MEMBERS PLACEHOLDER DATA
+ * OFFICIAL TEAM MEMBER INTERFACE WITH EXTENDED METADATA
  */
+export interface DetailedTeamMember extends TeamMember {
+  regdNo?: string;
+  year?: string;
+  section?: string;
+}
+
+export interface OfficialTeamStructure {
+  president: DetailedTeamMember;
+  vicePresidents: DetailedTeamMember[];
+  secretaries: DetailedTeamMember[];
+}
+
+export const OFFICIAL_TEAM: OfficialTeamStructure = {
+  president: {
+    id: "tm-pres-1",
+    name: "Sunnapu Likitha",
+    role: "President",
+    department: "Data Science (Sec 2)",
+    year: "3rd Year",
+    regdNo: "24L31A44B1",
+    imageUrl: "/team/president.JPG"
+  },
+  vicePresidents: [
+    {
+      id: "tm-vp-1",
+      name: "Mohamed Khaja Eshaq",
+      role: "Vice President",
+      department: "CSE (Sec 4)",
+      year: "3rd Year",
+      regdNo: "24L31A05O8",
+      imageUrl: "/team/vice_president1.JPG"
+    },
+    {
+      id: "tm-vp-2",
+      name: "Peela Leela",
+      role: "Vice President",
+      department: "CSE (Sec 6)",
+      year: "3rd Year",
+      regdNo: "24L31A05W2",
+      imageUrl: "/team/vice_president2.JPG"
+    },
+    {
+      id: "tm-vp-3",
+      name: "CH Manoj",
+      role: "Vice President",
+      department: "Cybersecurity (Sec 1)",
+      year: "2nd Year",
+      regdNo: "25L31A4626",
+      imageUrl: "/team/vice_president3.JPG"
+    }
+  ],
+  secretaries: [
+    {
+      id: "tm-sec-1",
+      name: "Kadagalla Prasad",
+      role: "Secretary (Event Manager)",
+      department: "CSE (Sec 3)",
+      year: "3rd Year",
+      regdNo: "24L31A05F2",
+      imageUrl: "/team/prasad.JPG"
+    },
+    {
+      id: "tm-sec-2",
+      name: "Jureddy Manideep",
+      role: "Secretary (Technical Manager)",
+      department: "CSE (Sec 3)",
+      year: "3rd Year",
+      regdNo: "24L31A05F1",
+      imageUrl: "/team/manideep.JPG"
+    },
+    {
+      id: "tm-sec-3",
+      name: "Vanjarapu Eswara Vara Prasad",
+      role: "Secretary (Social Media Manager)",
+      department: "AI & DS (Sec 3)",
+      year: "3rd Year",
+      regdNo: "24L31A5414",
+      imageUrl: "/team/eswar.jpeg"
+    },
+    {
+      id: "tm-sec-4",
+      name: "Sai Teja",
+      role: "Secretary (Content Creator)",
+      department: "Mechanical (Sec 2)",
+      year: "3rd Year",
+      regdNo: "24L31A0399",
+      imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80"
+    }
+  ]
+};
+
 export const INITIAL_TEAM: TeamMember[] = [
-  {
-    id: "tm-1",
-    name: "Dr. Faculty Coordinator",
-    role: "Faculty Advisor",
-    department: "NEC Innovation & Incubation Cell",
-    imageUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80",
-    linkedin: "https://linkedin.com",
-    email: "advisor@nec.edu.in"
-  },
-  {
-    id: "tm-2",
-    name: "Overall Student Lead",
-    role: "Overall Coordinator",
-    department: "Computer Science & Engg",
-    imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80",
-    linkedin: "https://linkedin.com",
-    email: "lead@nec.edu.in"
-  },
-  {
-    id: "tm-3",
-    name: "Events & Operations Head",
-    role: "Events Manager",
-    department: "Electronics & Comm Engg",
-    imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80",
-    linkedin: "https://linkedin.com"
-  },
-  {
-    id: "tm-4",
-    name: "Corporate & IITB Liaison Lead",
-    role: "Relations Lead",
-    department: "Mechanical Engg",
-    imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80",
-    linkedin: "https://linkedin.com"
-  }
+  OFFICIAL_TEAM.president,
+  ...OFFICIAL_TEAM.vicePresidents,
+  ...OFFICIAL_TEAM.secretaries
 ];
