@@ -243,7 +243,7 @@ export default function TeamCard3D({
               )}
 
               {/* Skills */}
-              {member.skills.length > 0 && (
+              {member.skills && member.skills.length > 0 && (
                 <div className="mb-4">
                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Skills</p>
                   <div className="flex flex-wrap gap-1.5">
@@ -260,7 +260,7 @@ export default function TeamCard3D({
               )}
 
               {/* Projects */}
-              {member.projects.length > 0 && (
+              {member.projects && member.projects.length > 0 && (
                 <div className="mb-4">
                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Projects</p>
                   <div className="space-y-1">

@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import EventsPage from './pages/EventsPage';
@@ -18,10 +18,29 @@ function ScrollToTop() {
   return null;
 }
 
+/* Global Secret Shortcut: Ctrl + Shift + A (or Cmd + Shift + A on Mac) */
+function GlobalAdminShortcut() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        navigate('/admin');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [navigate]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <GlobalAdminShortcut />
       <Routes>
         <Route path="/"              element={<HomePage />}         />
         <Route path="/about"         element={<AboutPage />}        />
@@ -35,3 +54,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+

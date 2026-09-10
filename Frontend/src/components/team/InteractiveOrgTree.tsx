@@ -13,6 +13,7 @@ import {
 import { ChevronDown, Crown, Shield, Award, Star, User } from 'lucide-react';
 
 const TIER_ICONS: Record<TeamTier, React.ElementType> = {
+  faculty: Award,
   president: Crown,
   vp: Shield,
   secretary: Award,

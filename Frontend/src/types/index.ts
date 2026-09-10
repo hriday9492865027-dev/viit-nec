@@ -7,6 +7,7 @@ export interface EventItem {
   location: string;
   imageUrl: string;
   link?: string;
+  eventCode?: string;
 }
 
 export interface TaskItem {
@@ -27,6 +28,8 @@ export interface GalleryImage {
   category?: string;
   isFeatured: boolean;
   uploadedAt: string;
+  images?: string[];
+  eventCode?: string;
 }
 
 export interface InstagramPost {

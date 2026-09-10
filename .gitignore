@@ -26,3 +26,23 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
+# ─── Environment / Secrets (NEVER commit these) ───────────────────
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+Backend/.env
+Frontend/.env
+*.env
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+

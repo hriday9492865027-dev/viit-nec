@@ -170,14 +170,11 @@ const STATS = [
 ];
 
 function HeroSection() {
-  const [scrollY, setScrollY] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 120);
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => { clearTimeout(t); window.removeEventListener('scroll', onScroll); };
+    return () => clearTimeout(t);
   }, []);
 
   return (
@@ -194,14 +191,11 @@ function HeroSection() {
         background: C.green,
       }}
     >
-      {/* Building image with parallax */}
+      {/* Building image */}
       <div
         style={{
           position: 'absolute',
-          inset: '-10%',
-          transform: `translateY(${scrollY * 0.25}px)`,
-          transition: 'transform 0.1s linear',
-          willChange: 'transform',
+          inset: 0,
         }}
       >
         <img

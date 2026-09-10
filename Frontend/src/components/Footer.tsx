@@ -1,13 +1,31 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
+import React, { useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Award, Instagram, Linkedin, Mail, ArrowUp } from 'lucide-react';
 import { INSTAGRAM_CONFIG } from '@/data/initialData';
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const clickCount = useRef(0);
+  const clickTimer = useRef<any>(null);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSecretTrigger = () => {
+    clickCount.current += 1;
+    if (clickTimer.current) clearTimeout(clickTimer.current);
+
+    if (clickCount.current >= 3) {
+      clickCount.current = 0;
+      navigate('/admin');
+    } else {
+      clickTimer.current = setTimeout(() => {
+        clickCount.current = 0;
+      }, 1200);
+    }
   };
 
   return (
@@ -75,16 +93,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Portal Links */}
+          {/* Col 3: Quick Links */}
           <div className="space-y-3">
-            <h4 className="text-xs font-extrabold uppercase tracking-widest text-slate-200">Portals & Admin</h4>
+            <h4 className="text-xs font-extrabold uppercase tracking-widest text-slate-200">Quick Links</h4>
             <ul className="space-y-2 text-xs font-semibold">
-              <li>
-                <Link href="/admin" className="text-blue-400 hover:underline flex items-center gap-1 font-bold">
-                  Photo & Featured Admin Panel
-                </Link>
-              </li>
-              <li><Link href="/gallery" className="hover:text-blue-400 transition-colors">Full Photo Archive</Link></li>
+              <li><Link to="/gallery" className="hover:text-blue-400 transition-colors">Full Photo Archive</Link></li>
+              <li><Link to="/team" className="hover:text-blue-400 transition-colors">Core Leadership Team</Link></li>
               <li><a href="#contact" className="hover:text-blue-400 transition-colors">Contact Coordinators</a></li>
             </ul>
           </div>
@@ -115,7 +129,7 @@ export default function Footer() {
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="mailto:ecell@nec.edu.in"
+                href="mailto:viitnec@gmail.com"
                 className="p-2.5 rounded-xl bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white transition-colors border border-slate-700"
                 aria-label="Email"
               >
@@ -128,7 +142,12 @@ export default function Footer() {
 
         {/* Bottom Disclaimer */}
         <div className="mt-12 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
-          <p>© {new Date().getFullYear()} NEC E-Cell. All rights reserved.</p>
+          <p
+            onClick={handleSecretTrigger}
+            className="cursor-default select-none hover:text-slate-300 transition-colors"
+          >
+            © {new Date().getFullYear()} NEC E-Cell. All rights reserved.
+          </p>
           <p className="flex items-center gap-1 font-normal">
             Built for NEC College in association with <span className="text-blue-400 font-bold">E-Cell IIT Bombay</span>
           </p>

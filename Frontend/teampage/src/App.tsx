@@ -227,7 +227,7 @@ function CoverSection() {
             <Rule color={C.green} my={24} />
             <p style={{
               fontFamily: 'var(--font-body)', fontSize: '0.78rem',
-              letterSpacing: '0.12em', color: C.green, opacity: 0.55,
+              letterSpacing: '0.12em', color: C.green,
               textTransform: 'uppercase',
               opacity: loaded ? 0.55 : 0,
               transition: 'opacity 0.8s ease 0.8s',

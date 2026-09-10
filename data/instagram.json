@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ig-1",
+    "permalink": "https://instagram.com/nec_ecell",
+    "mediaUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+    "caption": "🚀 Big news! Registrations for E-Summit '26 are officially OPEN! Link in bio. #NECECell #IITBombayECell #StartupCulture",
+    "timestamp": "2026-07-20",
+    "isFeatured": true,
+    "likeCount": 245
+  },
+  {
+    "id": "ig-2",
+    "permalink": "https://instagram.com/nec_ecell",
+    "mediaUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80",
+    "caption": "Highlights from our interactive workshop in association with E-Cell IIT Bombay. Empowering student innovators! 💡",
+    "timestamp": "2026-07-15",
+    "isFeatured": true,
+    "likeCount": 189
+  },
+  {
+    "id": "ig-3",
+    "permalink": "https://instagram.com/nec_ecell",
+    "mediaUrl": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80",
+    "caption": "Meet the student leads driving the entrepreneurship revolution at NEC Campus! 🔥 #TeamECELL",
+    "timestamp": "2026-07-10",
+    "isFeatured": true,
+    "likeCount": 310
+  },
+  {
+    "id": "ig-4",
+    "permalink": "https://instagram.com/nec_ecell",
+    "mediaUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
+    "caption": "Ideation to Execution! Quick tips for building a pitch deck that attracts investors. 📊",
+    "timestamp": "2026-07-01",
+    "isFeatured": false,
+    "likeCount": 154
+  }
+]

@@ -10,6 +10,7 @@ export const INSTAGRAM_CONFIG = {
 
 /**
  * INITIAL EVENTS DATA
+ * You can add more events manually here or manage them via the /admin panel.
  */
 export const INITIAL_EVENTS: EventItem[] = [];
 
@@ -195,56 +196,7 @@ export const INITIAL_TASKS: TaskItem[] = [
 /**
  * INITIAL GALLERY IMAGES
  */
-export const INITIAL_GALLERY: GalleryImage[] = [
-  {
-    id: "img-1",
-    title: "E-Summit Inauguration Ceremony",
-    category: "Summit",
-    url: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1000&q=80",
-    isFeatured: true,
-    uploadedAt: "2026-04-16"
-  },
-  {
-    id: "img-2",
-    title: "Student Startup Pitch Deck Presentation",
-    category: "Pitching",
-    url: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1000&q=80",
-    isFeatured: true,
-    uploadedAt: "2026-04-16"
-  },
-  {
-    id: "img-3",
-    title: "IIT Bombay E-Cell Mentorship Session",
-    category: "Workshop",
-    url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80",
-    isFeatured: true,
-    uploadedAt: "2026-04-17"
-  },
-  {
-    id: "img-4",
-    title: "Hackathon Team Brainstorming",
-    category: "Hackathon",
-    url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80",
-    isFeatured: true,
-    uploadedAt: "2026-04-18"
-  },
-  {
-    id: "img-5",
-    title: "Guest Keynote Address by Tech Leaders",
-    category: "Summit",
-    url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=80",
-    isFeatured: false,
-    uploadedAt: "2026-04-19"
-  },
-  {
-    id: "img-6",
-    title: "Award Distribution & Winner Announcement",
-    category: "Summit",
-    url: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=1000&q=80",
-    isFeatured: true,
-    uploadedAt: "2026-04-20"
-  }
-];
+export const INITIAL_GALLERY: GalleryImage[] = [];
 
 /**
  * INSTAGRAM FEED POSTS

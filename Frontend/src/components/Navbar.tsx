@@ -1,12 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Image as ImageIcon, Sparkles } from 'lucide-react';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,14 +18,18 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Tasks & Events', href: '#tasks-events' },
-    { name: 'Gallery', href: '#gallery' },
-    { name: 'Instagram', href: '#instagram' },
-    { name: 'Team', href: '#team' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', to: '/' },
+    { name: 'About', to: '/about' },
+    { name: 'Events', to: '/events' },
+    { name: 'Gallery', to: '/gallery' },
+    { name: 'Team', to: '/team' },
+    { name: 'Contact', to: '/contact' },
   ];
+
+  const isActive = (path: string) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
+  };
 
   return (
     <>
@@ -33,7 +38,7 @@ export default function Navbar() {
          ============================================================ */}
       <div className="bg-white border-b border-slate-100 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-3 items-center py-3">
+          <div className="grid grid-cols-3 items-center py-4 sm:py-5 lg:py-6">
 
             <div className="flex items-center justify-start animate-fade-left">
               <button 
@@ -42,34 +47,35 @@ export default function Navbar() {
                   window.dispatchEvent(new CustomEvent('trigger-intro-page'));
                 }}
                 className="block group bg-transparent border-none p-0 focus:outline-none cursor-pointer"
+                title="Replay intro animation"
               >
                 <img
                   src="/logos/ecell-logo.jpg"
                   alt="E-Cell Logo"
-                  className="h-12.5 sm:h-15 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform duration-300"
-                  style={{ height: '90px' }}
+                  className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain rounded-xl group-hover:scale-105 transition-transform duration-300"
+                  style={{ maxHeight: '115px' }}
                 />
               </button>
             </div>
 
             <div className="flex items-center justify-center animate-fade-down">
-              <Link href="/" className="block group">
+              <Link to="/" className="block group">
                 <img
                   src="/logos/viit-logo.png"
                   alt="VIIT Logo"
-                  className="h-12.5 sm:h-15 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-                  style={{ height: '90px' }}
+                  className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                  style={{ maxHeight: '115px' }}
                 />
               </Link>
             </div>
 
             <div className="flex items-center justify-end animate-fade-right">
-              <Link href="/" className="block group">
+              <Link to="/" className="block group">
                 <img
                   src="/logos/nec-logo.jpeg"
                   alt="NEC Logo"
-                  className="h-12.5 sm:h-15 w-auto object-contain rounded-2xl group-hover:scale-105 transition-transform duration-300"
-                  style={{ height: '90px' }}
+                  className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain rounded-2xl group-hover:scale-105 transition-transform duration-300"
+                  style={{ maxHeight: '115px' }}
                 />
               </Link>
             </div>
@@ -79,54 +85,50 @@ export default function Navbar() {
       </div>
 
       {/* ============================================================
-          STICKY NAV — floating pill, only pill has background
+          STICKY NAV — floating pill matching screenshot
          ============================================================ */}
       <div className="sticky top-0 z-50 pointer-events-none h-0 w-full bg-transparent">
 
         {/* Desktop: centered floating pill */}
         <div className="hidden lg:flex items-center justify-center py-3">
           <div
-            className={`pointer-events-auto inline-flex items-center gap-1 px-4 py-1.5 rounded-full border shadow-xl transition-all duration-500 ${
+            className={`pointer-events-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border transition-all duration-500 ${
               scrolled
-                ? 'bg-white/70 backdrop-blur-md border-white/20 shadow-blue-900/5'
-                : 'bg-white/40 backdrop-blur-sm border-white/10 shadow-slate-200/30'
+                ? 'bg-white/90 backdrop-blur-md border-[#E3D9CB] shadow-sm'
+                : 'bg-white/80 backdrop-blur-sm border-[#E5DCD0] shadow-xs'
             }`}
             style={{
-              backdropFilter: scrolled ? 'blur(16px)' : 'blur(8px)',
-              WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'blur(8px)',
+              backdropFilter: scrolled ? 'blur(16px)' : 'blur(10px)',
+              WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'blur(10px)',
             }}
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="nav-link-animated px-4 py-1.5 text-[14px] uppercase tracking-wider font-extrabold text-slate-700 hover:text-blue-700 transition-colors duration-300 rounded-full hover:bg-blue-50/60"
-              >
-                {link.name}
-              </a>
-            ))}
-
-            <div className="w-px h-5 bg-slate-300 mx-1" />
-
-            <Link
-              href="/admin"
-              className="inline-flex items-center gap-2 px-4 py-1.5 text-[14px] font-extrabold uppercase tracking-wider text-blue-700 hover:text-blue-900 hover:bg-blue-50/60 rounded-full transition-all duration-300"
-              title="Admin Panel"
-            >
-              <ImageIcon className="w-4 h-4" />
-              Admin
-            </Link>
+            {navLinks.map((link) => {
+              const active = isActive(link.to);
+              return (
+                <Link
+                  key={link.name}
+                  to={link.to}
+                  className={`px-4 py-1.5 text-[13px] uppercase tracking-wider font-extrabold rounded-full transition-all duration-300 ${
+                    active
+                      ? 'bg-[#E5DFD3] text-[#183A37] shadow-xs'
+                      : 'text-[#283238] hover:text-[#183A37] hover:bg-[#FAF6EE]'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
         </div>
 
         {/* Mobile: hamburger button */}
-        <div className="flex lg:hidden items-center justify-between py-2 px-4">
-          <span className="pointer-events-auto text-sm font-extrabold text-blue-950 uppercase tracking-wider bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg border border-slate-200 shadow-sm">
-            Menu
+        <div className="flex lg:hidden items-center justify-between py-2.5 px-4">
+          <span className="pointer-events-auto text-xs font-black text-[#183A37] uppercase tracking-wider bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg border border-slate-200 shadow-sm">
+            NEC E-Cell
           </span>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="pointer-events-auto p-2 rounded-xl bg-white/90 backdrop-blur-md text-slate-700 border border-slate-200 shadow-sm focus:outline-none hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-all duration-300"
+            className="pointer-events-auto p-2 rounded-xl bg-white/90 backdrop-blur-md text-[#183A37] border border-slate-200 shadow-sm focus:outline-none hover:bg-slate-50 transition-all"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -136,7 +138,7 @@ export default function Navbar() {
       </div>
 
       {/* ============================================================
-          MOBILE DRAWER — separate from sticky div
+          MOBILE DRAWER
          ============================================================ */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
@@ -145,38 +147,27 @@ export default function Navbar() {
       >
         <div className="bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-2 shadow-xl">
           <div className="py-2 px-3 rounded-xl badge-iitb-tech text-xs font-bold flex items-center gap-2 mb-3">
-            <Sparkles className="w-4 h-4 text-blue-700 shrink-0" />
+            <Sparkles className="w-4 h-4 text-[#815355] shrink-0" />
             <span>In association with E-Cell IIT Bombay</span>
           </div>
 
-          {navLinks.map((link, i) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-3 rounded-xl text-base font-bold text-slate-800 hover:text-blue-700 hover:bg-blue-50 border border-transparent hover:border-blue-100 transition-all duration-300"
-              style={{ animationDelay: `${i * 60}ms` }}
-            >
-              {link.name}
-            </a>
-          ))}
-
-          <div className="pt-3 flex flex-col gap-2">
-            <Link
-              href="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-sm font-bold text-slate-800 hover:bg-blue-50 hover:border-blue-200 transition-all duration-300"
-            >
-              Gallery Admin Panel
-            </Link>
-            <a
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="btn-primary w-full text-center px-4 py-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-sm font-extrabold uppercase tracking-wider text-white shadow-md"
-            >
-              Join NEC E-Cell
-            </a>
-          </div>
+          {navLinks.map((link) => {
+            const active = isActive(link.to);
+            return (
+              <Link
+                key={link.name}
+                to={link.to}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`block px-4 py-2.5 rounded-xl text-sm font-extrabold uppercase tracking-wide transition-all ${
+                  active
+                    ? 'bg-[#183A37] text-[#EFD6AC]'
+                    : 'text-slate-800 hover:bg-slate-50'
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </>

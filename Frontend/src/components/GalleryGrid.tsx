@@ -2,62 +2,98 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GalleryImage } from '@/types';
 import LightboxModal from './LightboxModal';
-import { Maximize2, ArrowRight, Settings } from 'lucide-react';
+import GalleryCard from './GalleryCard';
+import { ArrowRight, Settings } from 'lucide-react';
+import { INITIAL_GALLERY } from '@/data/initialData';
+
+const STORAGE_KEY = 'ecell_gallery';
 
 export default function GalleryGrid() {
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
 
   useEffect(() => {
     fetchFeaturedImages();
   }, []);
 
   const fetchFeaturedImages = async () => {
+    setLoading(true);
+    let allImages: GalleryImage[] = INITIAL_GALLERY;
+
+    // Check localStorage first
     try {
-      setLoading(true);
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          allImages = parsed;
+        }
+      }
+    } catch {}
+
+    // Check API to sync
+    try {
       const res = await fetch('/api/gallery?featured=true');
-      const data = await res.json();
-      if (data.success) {
-        setImages(data.images);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.images)) {
+          setImages(data.images);
+          setLoading(false);
+          return;
+        }
       }
     } catch (err) {
-      console.error('Error fetching featured gallery:', err);
+      // Offline or static build fallback
     } finally {
       setLoading(false);
     }
+
+    setImages(allImages.filter(i => i.isFeatured));
+  };
+
+  const handleCardClick = (img: GalleryImage, photoIndex = 0) => {
+    setSelectedImage(img);
+    setSelectedPhotoIndex(photoIndex);
   };
 
   return (
-    <section id="gallery" className="py-28 bg-slate-50 text-slate-900 border-b border-slate-200 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="gallery" className="py-24 sm:py-32 bg-[#fffdf8] tech-grid-pattern text-[#0f0d0c] border-b border-[rgba(24,58,55,0.12)] relative overflow-hidden">
+      {/* Earthy Elegance Ambient Lighting Orbs matching Hero & Events */}
+      <div
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[450px] rounded-full blur-[150px] pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(239,214,172,0.45) 0%, transparent 70%)' }}
+      />
+      <div
+        className="absolute top-1/3 -right-20 w-[450px] h-[450px] rounded-full blur-[130px] pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(129,83,85,0.14) 0%, transparent 70%)' }}
+      />
+      <div
+        className="absolute bottom-10 -left-20 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(24,58,55,0.10) 0%, transparent 70%)' }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
           <div className="space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-blue-100/80 border border-blue-200 text-xs font-extrabold text-blue-800 uppercase tracking-widest">
+            <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-600/20 text-xs font-bold text-[#8A5A58] uppercase tracking-widest">
               Event Highlights
             </div>
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-950">
-              Featured Moments
+            <h2 className="text-4xl sm:text-5xl font-black text-[#183A37] tracking-tight">
+              Featured <span className="gradient-text">Moments</span>
             </h2>
-            <p className="text-slate-600 text-base sm:text-lg max-w-xl font-medium">
+            <p className="text-[#5A6772] text-base sm:text-lg max-w-xl font-medium">
               Highlights from pitch competitions, IIT Bombay summits, and student entrepreneurship workshops.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <Link
-              to="/admin"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-slate-200 bg-white hover:bg-blue-50 text-slate-800 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 shadow-sm hover:border-blue-300 hover:-translate-y-0.5"
-              title="Upload new photos & select featured images"
-            >
-              <Settings className="w-4 h-4 text-blue-700" />
-              Manage Featured
-            </Link>
-            <Link
               to="/gallery"
-              className="btn-primary inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white text-xs font-extrabold uppercase tracking-wider shadow-md shadow-blue-700/20"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#163A36] hover:bg-[#102A27] text-white text-xs font-extrabold uppercase tracking-wider shadow-md shadow-[#163A36]/20 transition-all hover:-translate-y-0.5"
             >
               View Full Gallery
               <ArrowRight className="w-4 h-4" />
@@ -65,62 +101,33 @@ export default function GalleryGrid() {
           </div>
         </div>
 
-        {/* Gallery Grid - BIGGER CARDS */}
+        {/* Gallery Grid */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3, 4, 5, 6].map((n) => (
-              <div key={n} className="h-80 bg-slate-200 rounded-2xl animate-pulse" />
+              <div key={n} className="h-80 bg-slate-200/60 rounded-3xl animate-pulse" />
             ))}
           </div>
         ) : images.length === 0 ? (
-          <div className="p-16 text-center bg-white rounded-2xl border border-slate-200 space-y-5 shadow-sm">
-            <p className="text-slate-600 text-base font-medium">No featured images selected yet.</p>
+          <div className="p-16 text-center bg-[#fffdf8] rounded-3xl border border-[rgba(24,58,55,0.12)] space-y-5 shadow-xs">
+            <p className="text-[#5A6772] text-base font-medium">No featured event highlights yet.</p>
             <Link
-              to="/admin"
-              className="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-700 text-white text-xs font-extrabold uppercase tracking-wider"
+              to="/gallery"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#163A36] hover:bg-[#102A27] text-white text-xs font-extrabold uppercase tracking-wider shadow-md shadow-[#163A36]/20"
             >
-              Go to Admin Panel to Select Featured Images
+              View Photo Archive
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-9">
             {images.map((img, i) => (
-              <div
+              <GalleryCard
                 key={img.id}
-                onClick={() => setSelectedImage(img)}
-                className="gallery-card group relative h-80 sm:h-96 rounded-2xl overflow-hidden cursor-pointer shadow-sm border border-slate-200 stagger-item"
-                style={{ animationDelay: `${i * 100}ms` }}
-              >
-                <img
-                  src={img.url}
-                  alt={img.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover"
-                />
-
-                {/* Overlay with smooth transition */}
-                <div className="overlay absolute inset-0 bg-gradient-to-t from-blue-950/85 via-blue-950/30 to-transparent opacity-70 group-hover:opacity-95 transition-opacity duration-500" />
-
-                {/* Content overlay */}
-                <div className="absolute inset-0 p-6 flex flex-col justify-between z-10 text-white">
-                  <div className="flex justify-between items-start">
-                    <span className="px-3.5 py-1.5 rounded-full bg-blue-700/90 backdrop-blur-md text-[11px] font-extrabold text-white uppercase tracking-wider border border-blue-400/30 transition-all duration-300 group-hover:bg-blue-600">
-                      {img.category || 'Featured'}
-                    </span>
-                    <div className="p-2.5 rounded-xl bg-white/90 text-blue-900 opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-400 shadow-md">
-                      <Maximize2 className="w-5 h-5 text-blue-700" />
-                    </div>
-                  </div>
-
-                  <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-400">
-                    <h3 className="text-lg font-extrabold text-white group-hover:text-blue-100 transition-colors duration-300 line-clamp-1">
-                      {img.title}
-                    </h3>
-                    <p className="text-xs text-blue-200/80 font-medium mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-400">{img.uploadedAt}</p>
-                  </div>
-                </div>
-
-              </div>
+                img={img}
+                index={i}
+                onClick={handleCardClick}
+              />
             ))}
           </div>
         )}
@@ -129,8 +136,12 @@ export default function GalleryGrid() {
         <LightboxModal
           image={selectedImage}
           images={images}
+          initialPhotoIndex={selectedPhotoIndex}
           onClose={() => setSelectedImage(null)}
-          onSelectImage={(img) => setSelectedImage(img)}
+          onSelectImage={(img, idx = 0) => {
+            setSelectedImage(img);
+            setSelectedPhotoIndex(idx);
+          }}
         />
 
       </div>

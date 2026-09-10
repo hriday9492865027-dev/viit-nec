@@ -93,9 +93,9 @@ export default function IntroPage({ onEnter }: IntroPageProps) {
       if (textRevealed) return;
       textRevealed = true;
       setTimeline(prev => ({ ...prev, eyebrow: true }));
-      setTimeout(() => setTimeline(prev => ({ ...prev, headline: true })), 220);
-      setTimeout(() => setTimeline(prev => ({ ...prev, tagline: true })), 520);
-      setTimeout(() => setTimeline(prev => ({ ...prev, cta: true })), 820);
+      setTimeout(() => setTimeline(prev => ({ ...prev, headline: true })), 180);
+      setTimeout(() => setTimeline(prev => ({ ...prev, tagline: true })), 380);
+      setTimeout(() => setTimeline(prev => ({ ...prev, cta: true })), 580);
     };
 
     let animationId: number;
@@ -106,11 +106,11 @@ export default function IntroPage({ onEnter }: IntroPageProps) {
       t += dt;
 
       if (logoMesh) {
-        const lp = clamp01((t - 1.6) / 1.6);
+        const lp = clamp01((t - 0.6) / 1.2);
         const le = easeOutBack(lp);
         logoMesh.scale.setScalar(0.72 + 0.28 * Math.min(le, 1));
         // @ts-ignore
-        logoMesh.material.opacity = clamp01((t - 1.6) / 1.1);
+        logoMesh.material.opacity = clamp01((t - 0.6) / 0.8);
         logoMesh.rotation.y = (1 - clamp01(lp)) * 0.9;
         logoGroup.position.y = 0.15 * Math.sin(t * 0.5);
       }
@@ -123,12 +123,17 @@ export default function IntroPage({ onEnter }: IntroPageProps) {
 
       renderer.render(scene, camera);
 
-      if (t > 2.7) {
+      if (t > 1.6) {
         revealText();
       }
     };
 
     animate();
+
+    // Auto-advance to the site after exactly 5 seconds
+    const autoEnterTimer = setTimeout(() => {
+      onEnter();
+    }, 5000);
 
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -138,23 +143,19 @@ export default function IntroPage({ onEnter }: IntroPageProps) {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      clearTimeout(autoEnterTimer);
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', handleResize);
       if (renderer.domElement && mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [onEnter]);
 
   const skipIntro = () => {
-    setSkipped(true);
-    setTimeline({
-      eyebrow: true,
-      headline: true,
-      tagline: true,
-      cta: true,
-    });
+    onEnter();
   };
+
 
   return (
     <div className="fixed inset-0 z-[9999] overflow-hidden bg-white select-none">
@@ -241,6 +242,23 @@ export default function IntroPage({ onEnter }: IntroPageProps) {
           </div>
         </div>
       </div>
+
+      {/* 5-second Auto-Enter Progress Bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-slate-200/60 z-30 pointer-events-none">
+        <div
+          className="h-full bg-gradient-to-r from-blue-600 via-amber-500 to-indigo-600"
+          style={{
+            animation: 'introProgressBar 5s linear forwards',
+          }}
+        />
+      </div>
+      <style>{`
+        @keyframes introProgressBar {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+      `}</style>
     </div>
   );
 }
+

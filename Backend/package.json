@@ -1,0 +1,19 @@
+{
+  "name": "nec-ecell-backend",
+  "version": "1.0.0",
+  "description": "Backend server for NEC E-Cell with MongoDB storage and Nodemailer notifications",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5",
+    "nodemailer": "^6.10.0"
+  },
+  "devDependencies": {}
+}

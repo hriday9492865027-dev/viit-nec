@@ -9,9 +9,10 @@ import {
 } from '@/data/teamData';
 import { Crown, Shield, Award, Star, User, Quote } from 'lucide-react';
 
-const TIER_ORDER: TeamTier[] = ['president', 'vp', 'secretary', 'coordinator', 'member'];
+const TIER_ORDER: TeamTier[] = ['faculty', 'president', 'vp', 'secretary', 'coordinator', 'member'];
 
 const TIER_ICONS: Record<TeamTier, React.ElementType> = {
+  faculty: Award,
   president: Crown,
   vp: Shield,
   secretary: Award,
@@ -28,6 +29,7 @@ export default function TeamTimelineView({ filteredMembers }: TeamTimelineViewPr
 
   const groupedByTier = useMemo(() => {
     const groups: Record<TeamTier, EnhancedTeamMember[]> = {
+      faculty: [],
       president: [],
       vp: [],
       secretary: [],
