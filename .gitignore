@@ -12,9 +12,10 @@ node_modules/
 Frontend/dist/
 *.tsbuildinfo
 
-# Local database locks/json
+# Local database / JSON data files (NEVER commit real data)
 Frontend/data/*.json
 Backend/data/*.json
+data/*.json
 
 # Logs
 *.log

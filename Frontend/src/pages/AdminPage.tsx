@@ -14,10 +14,11 @@ import {
 
 const STORAGE_KEY = 'ecell_events';
 const STORAGE_KEY_GALLERY = 'ecell_gallery';
+// Admin passcode is sourced exclusively from the VITE_ADMIN_PASSCODE environment variable.
+// Set it in Vercel Dashboard → Project → Settings → Environment Variables.
+// Never hardcode passcodes here — they would be visible in the public GitHub repo.
 const VALID_PASSCODES = [
   ((import.meta as any).env?.VITE_ADMIN_PASSCODE as string),
-  'nec@2026',
-  'viitnec@2026',
 ].filter(Boolean);
 const AUTH_STORAGE_KEY = 'ecell_admin_auth';
 

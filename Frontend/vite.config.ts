@@ -250,6 +250,68 @@ function apiDevServerPlugin(): Plugin {
             }
           }
 
+          // ─── Fallback: /api/contact ───
+          if (pathname === '/api/contact') {
+            const contactFile = (() => {
+              const p1 = path.resolve(__dirname, 'data/contacts.json');
+              if (fs.existsSync(p1)) return p1;
+              const p2 = path.resolve(__dirname, '../data/contacts.json');
+              if (fs.existsSync(p2)) return p2;
+              return p1;
+            })();
+
+            if (method === 'GET') {
+              const messages = readJson(contactFile, []);
+              return sendJson({ success: true, count: messages.length, messages, source: 'offline_fallback' });
+            }
+
+            if (method === 'POST') {
+              const body = await getBody();
+              const { name, email, subject, message } = body;
+
+              if (!name || !name.trim()) {
+                return sendJson({ success: false, error: 'Full name is required' }, 400);
+              }
+              if (!email || !email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+                return sendJson({ success: false, error: 'A valid email address is required' }, 400);
+              }
+              if (!message || !message.trim()) {
+                return sendJson({ success: false, error: 'Message content is required' }, 400);
+              }
+
+              const newMsg = {
+                id: `msg-${Date.now()}`,
+                name: name.trim(),
+                email: email.trim().toLowerCase(),
+                subject: (subject && subject.trim()) ? subject.trim() : 'General Inquiry',
+                message: message.trim(),
+                status: 'unread',
+                emailSent: false,
+                createdAt: new Date().toISOString(),
+                source: 'offline_fallback',
+              };
+
+              const messages = readJson(contactFile, []);
+              messages.unshift(newMsg);
+              writeJson(contactFile, messages);
+
+              console.log(`[Dev Fallback] 📥 Contact form saved locally from "${newMsg.name}" (${newMsg.email})`);
+              return sendJson({
+                success: true,
+                message: 'Your message has been saved locally (backend offline). It will sync when the server is back online.',
+                data: { id: newMsg.id, emailSent: false },
+              }, 201);
+            }
+
+            if (method === 'DELETE') {
+              const id = pathname.split('/api/contact/')[1];
+              let messages = readJson(contactFile, []);
+              messages = messages.filter((m: any) => m.id !== id);
+              writeJson(contactFile, messages);
+              return sendJson({ success: true, message: 'Message deleted' });
+            }
+          }
+
           // ─── Fallback: /api/health ───
           if (pathname === '/api/health') {
             return sendJson({
