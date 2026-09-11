@@ -15,5 +15,7 @@
     "mongoose": "^8.9.5",
     "nodemailer": "^6.10.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@vercel/node": "^3.2.0"
+  }
 }

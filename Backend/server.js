@@ -639,4 +639,8 @@ if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   });
 }
 
-module.exports = { app, server, connectDB };
+module.exports = app;
+module.exports.app = app;
+module.exports.server = server;
+module.exports.connectDB = connectDB;
+
