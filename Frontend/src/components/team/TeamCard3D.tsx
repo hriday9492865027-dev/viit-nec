@@ -284,10 +284,6 @@ export default function TeamCard3D({
                   <span className="text-slate-400 font-bold uppercase tracking-wider">Year</span>
                   <span className="text-slate-700 font-bold">{member.year}</span>
                 </div>
-                <div className="flex items-center justify-between text-[10px]">
-                  <span className="text-slate-400 font-bold uppercase tracking-wider">Regd No</span>
-                  <span className="text-blue-700 font-bold font-mono">{member.regdNo}</span>
-                </div>
               </div>
             </div>
           </div>

@@ -79,7 +79,6 @@ export const STUDENT_TEAM: TeamMember[] = [
     imageUrl: '/team/president.JPG',
     department: 'Data Science',
     year: '3rd Year',
-    regdNo: '24L31A44B1',
     bio: 'Provides strategic direction and oversees end-to-end operations of NEC E-Cell.',
   },
 
@@ -160,7 +159,7 @@ export const STUDENT_TEAM: TeamMember[] = [
   },
   {
     id: 'lead-content',
-    name: 'Sai Teja',
+    name: 'Metta SaiTeja',
     role: 'Content Lead',
     tier: 'secretary',
     parentId: 'lead-pres',

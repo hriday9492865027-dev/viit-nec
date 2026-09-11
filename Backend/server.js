@@ -630,7 +630,7 @@ app.delete('/api/contact/:id', async (req, res) => {
   }
 });
 
-// Start listening if run directly
+// Start listening if run directly (active)
 let server = null;
 if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   server = app.listen(PORT, () => {

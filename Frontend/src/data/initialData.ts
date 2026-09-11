@@ -262,7 +262,6 @@ export const OFFICIAL_TEAM: OfficialTeamStructure = {
     role: "President",
     department: "Data Science (Sec 2)",
     year: "3rd Year",
-    regdNo: "24L31A44B1",
     imageUrl: "/team/president.JPG"
   },
   vicePresidents: [
@@ -272,7 +271,6 @@ export const OFFICIAL_TEAM: OfficialTeamStructure = {
       role: "Vice President",
       department: "CSE (Sec 4)",
       year: "3rd Year",
-      regdNo: "24L31A05O8",
       imageUrl: "/team/vice_president1.JPG"
     },
     {
@@ -281,7 +279,6 @@ export const OFFICIAL_TEAM: OfficialTeamStructure = {
       role: "Vice President",
       department: "CSE (Sec 6)",
       year: "3rd Year",
-      regdNo: "24L31A05W2",
       imageUrl: "/team/vice_president2.JPG"
     },
     {
@@ -290,7 +287,6 @@ export const OFFICIAL_TEAM: OfficialTeamStructure = {
       role: "Vice President",
       department: "Cybersecurity (Sec 1)",
       year: "2nd Year",
-      regdNo: "25L31A4626",
       imageUrl: "/team/vice_president3.JPG"
     }
   ],
@@ -301,7 +297,6 @@ export const OFFICIAL_TEAM: OfficialTeamStructure = {
       role: "Secretary (Event Manager)",
       department: "CSE (Sec 3)",
       year: "3rd Year",
-      regdNo: "24L31A05F2",
       imageUrl: "/team/prasad.JPG"
     },
     {
@@ -310,7 +305,6 @@ export const OFFICIAL_TEAM: OfficialTeamStructure = {
       role: "Secretary (Technical Manager)",
       department: "CSE (Sec 3)",
       year: "3rd Year",
-      regdNo: "24L31A05F1",
       imageUrl: "/team/manideep.JPG"
     },
     {
@@ -319,16 +313,14 @@ export const OFFICIAL_TEAM: OfficialTeamStructure = {
       role: "Secretary (Social Media Manager)",
       department: "AI & DS (Sec 3)",
       year: "3rd Year",
-      regdNo: "24L31A5414",
       imageUrl: "/team/eswar.jpeg"
     },
     {
       id: "tm-sec-4",
-      name: "Sai Teja",
+      name: "Metta SaiTeja",
       role: "Secretary (Content Creator)",
       department: "Mechanical (Sec 2)",
       year: "3rd Year",
-      regdNo: "24L31A0399",
       imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80"
     }
   ]
