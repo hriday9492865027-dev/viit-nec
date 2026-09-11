@@ -679,7 +679,7 @@ app.delete('/api/contact/:id', async (req, res) => {
 
 // Start listening if run directly (active)
 let server = null;
-if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
+if (require.main === module && process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   server = app.listen(PORT, () => {
     console.log(`🚀 NEC E-Cell Backend listening on http://localhost:${PORT}`);
     console.log(`📧 Configured contact recipient email: ${RECIPIENT_EMAIL}`);
