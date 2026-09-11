@@ -75,19 +75,65 @@ async function connectDB() {
     return connPromise;
   }
 
-  connPromise = mongoose.connect(MONGODB_URI, {
-    serverSelectionTimeoutMS: 5000,
-  }).then(async (conn) => {
-    isDbConnected = true;
-    console.log('✅ Connected to MongoDB successfully:', MONGODB_URI.replace(/\/\/.*@/, '//<credentials>@'));
-    return conn;
-  }).catch((err) => {
-    isDbConnected = false;
-    connPromise = null;
-    console.warn('⚠️  MongoDB connection warning:', err.message);
-    console.log('💡 Running with local JSON persistence until MongoDB is reachable.');
-    return null;
-  });
+  const LOCAL_FALLBACK_URI = 'mongodb://127.0.0.1:27017/nec_ecell';
+
+  const attemptConnect = async (uri, isFallback = false) => {
+    return mongoose.connect(uri, {
+      serverSelectionTimeoutMS: 5000,
+    }).then(async (conn) => {
+      isDbConnected = true;
+      const sanitized = uri.replace(/\/\/.*@/, '//<credentials>@');
+      console.log(`✅ Connected to ${isFallback ? 'local fallback ' : ''}MongoDB successfully: ${sanitized}`);
+      seedInitialDataIfEmpty().catch(() => {});
+      return conn;
+    });
+  };
+
+  async function seedInitialDataIfEmpty() {
+    try {
+      const eventCount = await Event.countDocuments();
+      if (eventCount === 0) {
+        const initialEvents = readJsonFile('events.json', []);
+        if (initialEvents.length > 0) {
+          await Event.insertMany(initialEvents, { ordered: false });
+          console.log(`🌱 Auto-seeded ${initialEvents.length} events into MongoDB.`);
+        }
+      }
+      const galleryCount = await GalleryItem.countDocuments();
+      if (galleryCount === 0) {
+        const initialGallery = readJsonFile('gallery.json', []);
+        if (initialGallery.length > 0) {
+          await GalleryItem.insertMany(initialGallery, { ordered: false });
+          console.log(`🌱 Auto-seeded ${initialGallery.length} gallery items into MongoDB.`);
+        }
+      }
+    } catch (seedErr) {
+      console.warn('⚠️ Auto-seed info:', seedErr.message);
+    }
+  }
+
+  connPromise = attemptConnect(MONGODB_URI)
+    .catch(async (err) => {
+      console.warn('⚠️  Primary MongoDB connection failed:', err.message);
+      if (err.name === 'MongooseServerSelectionError') {
+        console.warn('💡 Tip: For MongoDB Atlas, ensure your IP is whitelisted (or 0.0.0.0/0 is added in Atlas Network Access) and your cluster is not paused.');
+      }
+
+      // If primary URI is not local MongoDB, attempt connecting to local MongoDB
+      if (MONGODB_URI !== LOCAL_FALLBACK_URI) {
+        console.log('🔄 Attempting connection to local MongoDB instance (127.0.0.1:27017)...');
+        try {
+          return await attemptConnect(LOCAL_FALLBACK_URI, true);
+        } catch (localErr) {
+          console.warn('⚠️  Local MongoDB fallback also unreachable:', localErr.message);
+        }
+      }
+
+      isDbConnected = false;
+      connPromise = null;
+      console.log('💡 Running with local JSON persistence until MongoDB is reachable.');
+      return null;
+    });
 
   return connPromise;
 }
@@ -95,6 +141,7 @@ async function connectDB() {
 connectDB();
 
 mongoose.connection.on('disconnected', () => {
+  if (!isDbConnected) return;
   isDbConnected = false;
   connPromise = null;
   console.warn('⚠️  MongoDB disconnected. Attempting reconnection in 60 seconds...');

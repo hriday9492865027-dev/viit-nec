@@ -29,13 +29,16 @@ Thumbs.db
 
 # ─── Environment / Secrets (NEVER commit these) ───────────────────
 .env
-.env.local
-.env.development
-.env.production
-.env.staging
-Backend/.env
-Frontend/.env
+.env.*
 *.env
+*.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+*.pem
+*.key
+*.cert
 
 # Editor directories
 .vscode/
